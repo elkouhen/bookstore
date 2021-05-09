@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gui-deployment
+  labels:
+    app: gui
+spec:
+  selector:
+    matchLabels:
+      app: gui
+  template:
+    metadata:
+      labels:
+        app: gui
+    spec:
+      containers:
+        - name: java
+          image: k3d-registry:46697/gui
+          ports:
+            - containerPort: 8080

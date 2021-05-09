@@ -1,0 +1,4 @@
+/home/elkouhen/bookstore/bookstore-api/src/main/java/fr/cloudouest/bookstore/repository/BookRepository.java
+/home/elkouhen/bookstore/bookstore-api/src/main/java/fr/cloudouest/bookstore/entity/Book.java
+/home/elkouhen/bookstore/bookstore-api/src/main/java/fr/cloudouest/bookstore/api/BooksApi.java
+/home/elkouhen/bookstore/bookstore-api/src/main/java/fr/cloudouest/bookstore/Application.java
