@@ -2,6 +2,8 @@ package fr.cloudouest.bookstore.api;
 
 import fr.cloudouest.bookstore.entity.Book;
 import fr.cloudouest.bookstore.repository.BookRepository;
+import org.apache.commons.collections4.IterableUtils;
+import org.apache.commons.collections4.IteratorUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,9 +28,6 @@ public class BooksApi {
     @GetMapping
     List<Book> listBooks() {
 
-        List<Book> result = new ArrayList<>();
-        bookRepository.findAll().forEach(result::add);
-
-        return result;
+        return IterableUtils.toList(bookRepository.findAll());
     }
 }

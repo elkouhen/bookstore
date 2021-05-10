@@ -4,11 +4,19 @@ metadata:
   name: bookstore-gui
 build:
   artifacts:
-  - image: k3d-registry:46697/gui
-    docker:
-      dockerfile: Dockerfile
+    - image: k3d-registry:46697/gui
+      docker:
+        dockerfile: Dockerfile
+  local:
+    push: true
 deploy:
   kubectl:
     manifests:
-    - kubernetes/deployment.yml
-    - kubernetes/service.yml
+      - kubernetes/deployment.yml
+      - kubernetes/service.yml
+
+portForward:
+  - resourceType: deployment
+    resourceName: pg-deployment
+    port: 8080
+    localPort: 8080

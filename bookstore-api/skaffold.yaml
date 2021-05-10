@@ -4,11 +4,24 @@ metadata:
   name: bookstore-api
 build:
   artifacts:
-  - image: k3d-registry:46697/api
-    docker:
-      dockerfile: Dockerfile
+    - image: k3d-registry:46697/api
+      docker:
+        dockerfile: Dockerfile
+  local:
+    push: true
+
 deploy:
   kubectl:
     manifests:
-    - src/main/kubernetes/deployment.yml
-    - src/main/kubernetes/service.yml
+      - src/main/kubernetes/deployment.yml
+      - src/main/kubernetes/service.yml
+
+portForward:
+  - resourceType: deployment
+    resourceName: api-deployment
+    port: 8090
+    localPort: 8090
+  - resourceType: deployment
+    resourceName: api-deployment
+    port: 5005
+    localPort: 5005

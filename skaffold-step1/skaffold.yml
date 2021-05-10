@@ -1,3 +1,0 @@
-build:
-  artifacts:
-    - image: k3d-registry:46697/gui

@@ -7,8 +7,16 @@ build:
   - image: k3d-registry:46697/pg
     docker:
       dockerfile: Dockerfile
+  local:
+    push: true
 deploy:
   kubectl:
     manifests:
     - src/main/kubernetes/deployment.yml
     - src/main/kubernetes/service.yml
+
+portForward:
+  - resourceType: deployment
+    resourceName: pg-deployment
+    port: 5432
+    localPort: 5432

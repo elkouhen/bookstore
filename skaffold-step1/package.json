@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "up-pg": "cd ../bookstore-pg; skaffold dev --port-forward=services",
+    "up-api": "cd ../bookstore-api; skaffold debug --port-forward=user,services",
+    "up-gui": "cd ../bookstore-gui; skaffold dev --port-forward=services",
+    "down-pg": "cd ../bookstore-pg; skaffold delete",
+    "down-api": "cd ../bookstore-api; skaffold delete",
+    "down-gui": "cd ../bookstore-gui; skaffold delete"
+  },
+  "dependencies": {
+    "concurrently": "^6.1.0"
+  }
+}
