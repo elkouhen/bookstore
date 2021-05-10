@@ -1,0 +1,19 @@
+load('ext://restart_process', 'docker_build_with_restart')
+
+docker_build('k3d-registry:46697/gui', '../bookstore-gui')
+k8s_yaml(['../bookstore-gui/kubernetes/deployment.yml', '../bookstore-gui/kubernetes/service.yml'])
+
+docker_build_with_restart('k3d-registry:46697/api', '../bookstore-api',
+    entrypoint='mvn package; java -jar /home/app/bookstore-1.0.0-SNAPSHOT.jar',
+    live_update=[
+        sync('../bookstore-api/src', '/home/app/src'),
+        sync('../bookstore-api/pom.xml', '/home/app/pom.xml')
+])
+k8s_yaml(['../bookstore-api/src/main/kubernetes/deployment.yml', '../bookstore-api/src/main/kubernetes/service.yml'])
+
+docker_build('k3d-registry:46697/pg', '../bookstore-pg')
+k8s_yaml(['../bookstore-pg/src/main/kubernetes/deployment.yml', '../bookstore-pg/src/main/kubernetes/service.yml'])
+
+k8s_resource('gui-deployment', port_forwards=8080, resource_deps=['api-deployment'])
+k8s_resource('api-deployment', port_forwards=8090, resource_deps=['pg-deployment'])
+k8s_resource('pg-deployment', port_forwards=5432)

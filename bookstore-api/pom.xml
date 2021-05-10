@@ -14,6 +14,9 @@
 
     <properties>
         <java.version>16</java.version>
+        <postgresql.version>42.2.20</postgresql.version>
+        <flyway-core.version>7.8.2</flyway-core.version>
+        <commons-collections4.version>4.1</commons-collections4.version>
     </properties>
 
     <dependencies>
@@ -32,23 +35,22 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.2.20</version>
+            <version>${postgresql.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
-            <version>7.8.2</version>
+            <version>${flyway-core.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
-            <version>4.1</version>
+            <version>${commons-collections4.version}</version>
         </dependency>
     </dependencies>
 
