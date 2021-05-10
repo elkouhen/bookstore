@@ -1,0 +1,14 @@
+apiVersion: skaffold/v2beta15
+kind: Config
+metadata:
+  name: bookstore-api
+build:
+  artifacts:
+  - image: k3d-registry:46697/api
+    docker:
+      dockerfile: Dockerfile
+deploy:
+  kubectl:
+    manifests:
+    - src/main/kubernetes/deployment.yml
+    - src/main/kubernetes/service.yml
