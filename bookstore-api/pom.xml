@@ -5,7 +5,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.4.5</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
 
     <groupId>fr.cloudouest</groupId>
@@ -13,10 +13,11 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <properties>
-        <java.version>16</java.version>
+        <java.version>11</java.version>
         <postgresql.version>42.2.20</postgresql.version>
         <flyway-core.version>7.8.2</flyway-core.version>
         <commons-collections4.version>4.1</commons-collections4.version>
+        <jib.maven-plugin-version>3.0.0</jib.maven-plugin-version>
     </properties>
 
     <dependencies>
@@ -71,6 +72,21 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>${jib.maven-plugin-version}</version>
+                <configuration>
+                    <from>
+                        <image>gcr.io/google-appengine/openjdk:8</image>
+                    </from>
+                    <container>
+                        <jvmFlags>
+                            <jvmFlag>-Djava.security.egd=file:/dev/./urandom</jvmFlag>
+                        </jvmFlags>
+                    </container>
+                </configuration>
+            </plugin>
+            <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <source>${java.version}</source>
@@ -79,4 +95,33 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>jib</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.google.cloud.tools</groupId>
+                        <artifactId>jib-maven-plugin</artifactId>
+                        <version>${jib.maven-plugin-version}</version>
+                        <configuration>
+                            <from>
+                                <image>gcr.io/google-appengine/openjdk:8</image>
+                            </from>
+                            <container>
+                                <jvmFlags>
+                                    <jvmFlag>-Djava.security.egd=file:/dev/./urandom</jvmFlag>
+                                </jvmFlags>
+                            </container>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+
+        </profile>
+    </profiles>
 </project>
