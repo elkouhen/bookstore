@@ -14,7 +14,7 @@ spec:
         app: pg
     spec:
       containers:
-        - name: java
+        - name: database
           image: k3d-registry:46697/pg
           env:
             - name: POSTGRES_PASSWORD

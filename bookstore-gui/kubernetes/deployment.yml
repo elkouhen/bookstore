@@ -14,7 +14,7 @@ spec:
         app: gui
     spec:
       containers:
-        - name: java
+        - name: front
           image: k3d-registry:46697/gui
           ports:
             - containerPort: 8080

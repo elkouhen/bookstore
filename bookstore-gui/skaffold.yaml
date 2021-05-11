@@ -7,8 +7,7 @@ build:
     - image: k3d-registry:46697/gui
       docker:
         dockerfile: Dockerfile
-  local:
-    push: true
+
 deploy:
   kubectl:
     manifests:
