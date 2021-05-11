@@ -24,9 +24,15 @@ public class BooksApi {
         this.bookRepository = bookRepository;
     }
 
+    /**
+     *
+     * @return books in bookstore
+     */
     @CrossOrigin(origins = "*")
     @GetMapping
     List<Book> listBooks() {
+
+        int i=0;
 
         return IterableUtils.toList(bookRepository.findAll());
     }
