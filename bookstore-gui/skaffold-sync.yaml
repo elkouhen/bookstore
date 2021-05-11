@@ -1,0 +1,26 @@
+apiVersion: skaffold/v2beta15
+kind: Config
+metadata:
+  name: bookstore-gui
+build:
+  artifacts:
+    - image: k3d-registry:46697/gui
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        infer:
+          - "public/**"
+          - "src/**"
+          - "package.json"
+
+deploy:
+  kubectl:
+    manifests:
+      - kubernetes/deployment.yml
+      - kubernetes/service.yml
+
+portForward:
+  - resourceType: deployment
+    resourceName: pg-deployment
+    port: 8080
+    localPort: 8080
