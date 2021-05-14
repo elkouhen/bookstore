@@ -4,7 +4,7 @@ WORKDIR /home/app
 
 COPY pom.xml /home/app/pom.xml
 
-RUN mvn dependency:go-offline -B --fail-never
+RUN --mount=type=cache,target=/root/.m2  mvn dependency:resolve
 
 ADD src/ /home/app/src
 
