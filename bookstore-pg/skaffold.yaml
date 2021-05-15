@@ -1,0 +1,9 @@
+apiVersion: skaffold/v2beta16
+kind: Config
+metadata:
+  name: bookstore-pg
+deploy:
+  kubectl:
+    manifests:
+    - kubernetes/deployment.yml
+    - kubernetes/service.yml
