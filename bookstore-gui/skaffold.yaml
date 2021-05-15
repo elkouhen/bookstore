@@ -1,0 +1,16 @@
+apiVersion: skaffold/v2beta16
+kind: Config
+metadata:
+  name: bookstore-gui
+build:
+  local:
+    useBuildkit: true
+  artifacts:
+  - image: k3d-registry:46697/gui
+    docker:
+      dockerfile: Dockerfile
+deploy:
+  kubectl:
+    manifests:
+    - kubernetes/deployment.yml
+    - kubernetes/service.yml
