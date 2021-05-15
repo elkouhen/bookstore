@@ -53,6 +53,7 @@
             <artifactId>commons-collections4</artifactId>
             <version>${commons-collections4.version}</version>
         </dependency>
+        
     </dependencies>
 
     <build>

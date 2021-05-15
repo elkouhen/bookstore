@@ -2,17 +2,11 @@ apiVersion: skaffold/v2beta15
 kind: Config
 metadata:
   name: bookstore-pg
-build:
-  artifacts:
-  - image: k3d-registry:46697/pg
-    docker:
-      dockerfile: Dockerfile
-  local:
-    push: true
 deploy:
   kubectl:
     manifests:
-    - src/main/kubernetes/*
+      - kubernetes/deployment.yml
+      - kubernetes/service.yml
 
 portForward:
   - resourceType: deployment
