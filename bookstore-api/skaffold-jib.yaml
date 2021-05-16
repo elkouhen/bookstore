@@ -3,18 +3,17 @@ kind: Config
 metadata:
   name: bookstore-api
 build:
-  local:
-    useBuildkit: true
   artifacts:
     - image: k3d-registry:46697/api
       jib:
-        fromImage: amazoncorretto:16-alpine
-
+        type: maven
+        args:
+          - -Pjib
 deploy:
   kubectl:
     manifests:
-    - kubernetes/deployment.yml
-    - kubernetes/service.yml
+      - kubernetes/deployment.yml
+      - kubernetes/service.yml
 
 portForward:
   - resourceType: deployment

@@ -28,6 +28,13 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jdbc</artifactId>
         </dependency>
 
@@ -53,7 +60,8 @@
             <artifactId>commons-collections4</artifactId>
             <version>${commons-collections4.version}</version>
         </dependency>
-        
+
+
     </dependencies>
 
     <build>
@@ -61,16 +69,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <mainClass>fr.cloudouest.bookstore.Application</mainClass>
-                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -83,10 +81,11 @@
     </build>
 
     <profiles>
+
         <profile>
             <id>jib</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <build>
                 <plugins>
@@ -96,7 +95,7 @@
                         <version>${jib.maven-plugin-version}</version>
                         <configuration>
                             <from>
-                                <image>gcr.io/google-appengine/openjdk:8</image>
+                                <image>amazoncorretto:16-alpine</image>
                             </from>
                             <container>
                                 <jvmFlags>
@@ -109,4 +108,5 @@
             </build>
         </profile>
     </profiles>
+
 </project>
