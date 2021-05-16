@@ -7,12 +7,10 @@ build:
     useBuildkit: true
   artifacts:
   - image: k3d-registry:46697/api
-    docker:
-      dockerfile: Dockerfile
+    jib:
+      fromImage: amazoncorretto:16-alpine
     sync:
-      infer:
-        - "src/**"
-        - "pom.xml"
+      auto: true
 deploy:
   kubectl:
     manifests:
