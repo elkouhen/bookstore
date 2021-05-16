@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/books")
@@ -25,15 +26,14 @@ public class BooksApi {
     }
 
     /**
-     *
      * @return books in bookstore
      */
     @CrossOrigin(origins = "*")
     @GetMapping
     List<Book> listBooks() {
 
-        int i=0;
-
-        return IterableUtils.toList(bookRepository.findAll());
+        return IterableUtils.toList(bookRepository.findAll()).stream()
+                .map(book -> new Book(book.getId(), "a" + book.getAuthor(), book.getTitle())
+                ).collect(Collectors.toList());
     }
 }
