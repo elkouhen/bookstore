@@ -9,6 +9,13 @@ build:
   - image: k3d-registry:46697/gui
     docker:
       dockerfile: Dockerfile
+    sync:
+      infer:
+        - "public/**"
+        - "src/**"
+        - "package.json"
+        - "package-lock.json"
+
 deploy:
   kubectl:
     manifests:
