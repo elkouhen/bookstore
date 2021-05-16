@@ -14,3 +14,10 @@ deploy:
     manifests:
     - kubernetes/deployment.yml
     - kubernetes/service.yml
+
+
+portForward:
+  - resourceType: deployment
+    resourceName: gui-deployment
+    port: 8080
+    localPort: 8080
