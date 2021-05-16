@@ -5,7 +5,11 @@ WORKDIR /home/app
 
 COPY package.json /home/app/package.json
 
-RUN  --mount=type=cache,target=/home/app/node_modules npm install
+COPY package-lock.json /home/app/package-lock.json
+
+RUN --mount=type=cache,target=/home/app/.npm \
+    npm set cache /home/app/.npm && \
+    npm ci
 
 ADD public/ /home/app/public
 ADD src/ /home/app/src
