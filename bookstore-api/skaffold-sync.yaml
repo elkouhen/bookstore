@@ -1,0 +1,30 @@
+apiVersion: skaffold/v2beta16
+kind: Config
+metadata:
+  name: bookstore-api
+build:
+  local:
+    useBuildkit: true
+  artifacts:
+  - image: k3d-registry:46697/api
+    docker:
+      dockerfile: Dockerfile
+    sync:
+      infer:
+        - "src/**"
+        - "pom.xml"
+deploy:
+  kubectl:
+    manifests:
+    - kubernetes/deployment.yml
+    - kubernetes/service.yml
+
+portForward:
+  - resourceType: deployment
+    resourceName: api-deployment
+    port: 8090
+    localPort: 8090
+  - resourceType: deployment
+    resourceName: api-deployment
+    port: 5005
+    localPort: 5005
