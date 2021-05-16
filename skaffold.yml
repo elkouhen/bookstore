@@ -1,7 +1,0 @@
-apiVersion: skaffold/v2beta15
-kind: Config
-
-requires:
-  - path: ./bookstore-pg
-  - path: ./bookstore-api
-  - path: ./bookstore-gui
