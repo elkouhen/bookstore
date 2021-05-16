@@ -9,6 +9,10 @@ build:
   - image: k3d-registry:46697/api
     docker:
       dockerfile: Dockerfile
+    sync:
+      infer:
+        - "src/**"
+        - "pom.xml"
 deploy:
   kubectl:
     manifests:
