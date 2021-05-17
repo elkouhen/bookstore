@@ -1,3 +1,8 @@
+default_registry(
+    'localhost:46697',
+    host_from_cluster='k3d-registry:46697'
+)
+
 k8s_yaml(['bookstore-pg/kubernetes/deployment.yml', 'bookstore-pg/kubernetes/service.yml'])
 
 docker_build('k3d-registry:46697/api', 'bookstore-api')
