@@ -33,7 +33,7 @@ public class BooksApi {
     List<Book> listBooks() {
 
         return IterableUtils.toList(bookRepository.findAll()).stream()
-                .map(book -> new Book(book.getId(), "" + book.getAuthor(), book.getTitle())
+                .map(book -> new Book(book.getId(), "d" + book.getAuthor(), book.getTitle())
                 ).collect(Collectors.toList());
     }
 }
