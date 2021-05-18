@@ -25,5 +25,4 @@ docker_build('k3d-registry:46697/gui', 'bookstore-gui',
         sync('bookstore-gui/package-lock.json', '/home/app/package-lock.json')
 ])
 k8s_yaml(['bookstore-gui/kubernetes/deployment.yml', 'bookstore-gui/kubernetes/service.yml'])
-# k8s_resource('gui-deployment', port_forwards=8080, resource_deps=['api-deployment'])
-k8s_resource('gui-deployment', port_forwards=8080)
+k8s_resource('gui-deployment', port_forwards=8080, resource_deps=['api-deployment'])
