@@ -14,7 +14,7 @@ custom_build('k3d-registry:46697/api',
   ]
 )
 k8s_yaml(['bookstore-api/kubernetes/deployment.yml', 'bookstore-api/kubernetes/service.yml'])
-k8s_resource('api-deployment', port_forwards=8090, resource_deps=['pg-deployment'])
+k8s_resource('api-deployment', resource_deps=['pg-deployment'])
 
 docker_build('k3d-registry:46697/gui', 'bookstore-gui',
     entrypoint='npm run serve',
