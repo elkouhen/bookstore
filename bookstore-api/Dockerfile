@@ -1,4 +1,4 @@
-FROM maven:3.8.1-openjdk-16 as build
+FROM maven:3.8.1-openjdk-16
 
 WORKDIR /home/app
 
