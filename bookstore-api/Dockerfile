@@ -4,10 +4,10 @@ WORKDIR /home/app
 
 COPY pom.xml /home/app/pom.xml
 
-RUN mvn dependency:go-offline
+RUN --mount=type=cache,target=/root/.m2  mvn dependency:go-offline
 
 ADD src/ /home/app/src
 
-RUN mvn package
+RUN --mount=type=cache,target=/root/.m2 mvn package
 
 ENTRYPOINT java -jar /home/app/target/bookstore-1.0.0-SNAPSHOT.jar
