@@ -6,7 +6,7 @@ default_registry(
 k8s_yaml(['bookstore-pg/kubernetes/deployment.yml', 'bookstore-pg/kubernetes/service.yml'])
 k8s_resource('pg-deployment', port_forwards=5432)
 
-build_command = 'cd bookstore-api; mvn spring-boot:build-image -D image=$EXPECTED_REF'
+build_command = 'cd bookstore-api; mvn jib:dockerBuild -D image=$EXPECTED_REF'
 
 sync_files = [
     'bookstore-api/pom.xml',
@@ -14,7 +14,7 @@ sync_files = [
 ]
 live_update = [
     sync('bookstore-api/target/classes',
-         '/workspace/BOOT-INF/classes')
+         '/app/classes')
 ]
 custom_build('k3d-registry:46697/api',
              build_command,
